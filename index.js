@@ -6,7 +6,7 @@ var defaultOpt = {
 	ext: '.min',
 	prefix: '',
 	frm: 'cdn-loader',
-	show:!false
+	show:false
 }
 
 module.exports = function(source) {

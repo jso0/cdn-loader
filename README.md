@@ -37,7 +37,8 @@ webpack打包后
 
 ## TODO
 
-- [x] 编写一个直接更新webpack原始chunk的插件与``
+- [x] 编写一个更新html-webpack-plugin输出assets插件
+- [ ] 后续优化
 
 
 Have fun
@@ -45,3 +46,4 @@ Have fun
 by jso0
 
 [CDNjs.com](https://cdnjs.com/libraries)
+更多支持可通过`[html-webpack-cdn-plugin](https://github.com/jso0/html-webpack-cdn-plugin)`插件自行配置...

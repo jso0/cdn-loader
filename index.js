@@ -12,12 +12,15 @@ var defaultOpt = {
 module.exports = function(source) {
 	var query = loaderUtils.parseQuery(this.query);
 	if (this.query && this.query.indexOf('@') > 0) {
-		var regRule = /^\?\w+@[\w\.]+$/
-		var tmp = this.query.split('&')
+		var css = !!query.css
+		var regRule = /^\?\w+@[\w\.\,]+$/
+		var tmp = this.query.split(/&|\,/)
 		var lib = tmp[0].replace(/\!|\?/, '').split('@')
+
 		if (regRule.test(tmp[0])) {
 			var cdn = extend({}, defaultOpt, {
 				"name": lib[0],
+				"type": css ? 'css' : 'js',
 				"version": lib[1]
 			}, query)
 			var link_args = JSON.stringify(cdn)
@@ -31,8 +34,9 @@ module.exports = function(source) {
 				return "/*" + link_args + "*/\n" + windows
 			}
 		}
-		return ''
+		return '/* parameter invalid [name@version] */'
 	}
+	return '/* parameter invalid */'
 }
 
 function extend() {

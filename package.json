@@ -1,6 +1,6 @@
 {
   "name": "cdn-loader",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "cdn-loader for webpack",
   "main": "index.js",
   "scripts": {

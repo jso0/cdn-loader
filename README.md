@@ -1,6 +1,6 @@
 #介绍
 
-## 用法 (Usage)
+## 基本用法 (Usage)
 
 在入口文件中require("cdn-loader + ? + ModuleName + @ + version + !")
 
@@ -26,13 +26,17 @@ js
 /***/ }
 
 ```
-html
+
+手动添加到html文件
+
 ``` html
 // index.html
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 
 ```
+
+## 高级用法 (自动生成)
 
 更多支持可通过**[html-webpack-cdn-plugin](https://github.com/jso0/html-webpack-cdn-plugin)**插件自行配置...
 

@@ -1,7 +1,7 @@
 {
   "name": "cdn-loader",
-  "version": "0.1.8-0",
-  "description": "cdn-loader for webpack",
+  "version": "1.0.0pre",
+  "description": "cdn-loader (externals for webpack)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +14,7 @@
   "keywords": [
     "webpack",
     "cdn-loader",
+    "r-loader",
     "webpack-loader",
     "html-webpack-plugin",
     "html-webpack-cdn-plugin"
@@ -21,6 +22,6 @@
   "author": "jso0",
   "license": "GPL",
   "dependencies": {
-    "loader-utils": "^0.2.15"
+    "loader-utils": "^1.1.0"
   }
 }

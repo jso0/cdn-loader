@@ -1,4 +1,7 @@
-var loaderUtils = require("loader-utils");
+// import { getOptions } from 'loader-utils';
+const utils =  require('loader-utils')
+
+var log = console.log;
 
 var defaultOpt = {
 	type: 'js',
@@ -18,7 +21,23 @@ var libMap = {
 		'exports': '',
 		'show': false
 	},
+	'zepto': {
+		'pfx': 'zepto',
+		'type': 'js',
+		'file': 'zepto',
+		'defaultVersion': '1.2.0',
+		'exports': 'Zepto',
+		'show': true
+	},
 	'$': {
+		'pfx': 'jquery',
+		'type': 'js',
+		'file': 'jquery',
+		'defaultVersion': '3.1.1',
+		'exports': 'jQuery',
+		'show': true
+	},
+	'jQuery': {
 		'pfx': 'jquery',
 		'type': 'js',
 		'file': 'jquery',
@@ -38,7 +57,7 @@ var libMap = {
 		'pfx': 'normalize',
 		'type': 'css',
 		'file': 'normalize',
-		'defaultVersion': '5.0.0',
+		'defaultVersion': '8.0.0',
 		'exports': '',
 		'show': false
 	},
@@ -46,7 +65,7 @@ var libMap = {
 		'pfx': 'animate.css',
 		'type': 'css',
 		'file': 'animate',
-		'defaultVersion': '3.5.2',
+		'defaultVersion': '3.7.0',
 		'exports': '',
 		'show': false
 	},
@@ -61,14 +80,15 @@ var libMap = {
 }
 
 
-module.exports = function(source) {
-	var query = loaderUtils.parseQuery(this.query);
-	if (this.query) {
+module.exports = function(src, map, meta) {
+    const options = utils.getOptions(this) || {};
+    var query = (this.query);// utils.parseQuery
+    if (options) {
 		var regRule = /^\?.*@?$/
-		var tmp = this.query.split(/&|\,/)
+		var tmp = query.split(/&|\,/)
 		var lib = tmp[0].replace(/\!|\?/, '').split('@')
 		var currentLib = libMap[lib[0]] || libMap['loader_error']
-		var is_css =  currentLib.type ==  'css' || !!query.css
+		var is_css =  currentLib.type ==  'css' || !!options.css
 
 		if (regRule.test(tmp[0])) {
 			var cdn = extend({}, defaultOpt, {
@@ -77,8 +97,8 @@ module.exports = function(source) {
 				"type": is_css ? 'css' : 'js',
 				"version": lib[1] || currentLib.defaultVersion,
 				"show": currentLib.show,
-				"file": query.file || currentLib.file
-			}, query)
+				"file": options.file || currentLib.file
+			}, options)
 			var link_args = JSON.stringify(cdn)
 			var windows = "module.exports = window."+ cdn.exports +";"
 			if (is_css) {
@@ -91,8 +111,8 @@ module.exports = function(source) {
 			}
 		}
 		return '/* parameter invalid [name@version] */'
-	}
-	return '/* parameter invalid */'
+    }
+    return '/* parameter invalid */'
 }
 
 function extend() {
